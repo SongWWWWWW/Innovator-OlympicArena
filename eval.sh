@@ -3,6 +3,14 @@ source /mnt/innovator/miniconda3/etc/profile.d/conda.sh
 conda activate olympic
 cd /mnt/innovator/code/wangcong/Evaluation/OlympicArena/code
 
+
+export http_proxy=""
+export https_proxy=""
+export HTTP_PROXY=""
+export HTTPS_PROXY=""
+export no_proxy="localhost,127.0.0.1,0.0.0.0"
+
+
 export HF_ENDPOINT="https://hf-mirror.com"
 export HF_TOKEN=$HF_TOKEN
 export HF_DATASETS_CACHE="/mnt/innovator/data/wangcong/.cache"
@@ -23,12 +31,13 @@ rm -rf $MODEL_OUTPUT_DIR/*
 
 python ./inference.py \
     --model_output_dir $MODEL_OUTPUT_DIR \
-    --batch 2048 \
+    --batch 2560 \
     --api_key $OPENAI_API_KEY \
     --base_url $OPENAI_BASE_URL \
     --model gpt-4o-text-only \
     --split test \
     --save_error
+
 
 # python ./evaluation.py \
 #     --model_output_dir $MODEL_OUTPUT_DIR \
