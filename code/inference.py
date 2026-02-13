@@ -10,12 +10,16 @@ def get_model(model_name, args):
         return GPT_4o(model_name, api_key=args.api_key, base_url=args.base_url, mode="multi-modal")
     elif model_name == "gpt-4o-text-only":
         return GPT_4o(model_name, api_key=args.api_key, base_url=args.base_url, mode="text-only")
+    elif model_name == "Kimi-K2.5":
+        return GPT_4o(model_name, api_key=args.api_key, base_url=args.base_url, mode="text-only")
     elif model_name == "qwen2-72b-instruct": # an example open-source model
         return Qwen2(model_path="Qwen/Qwen2-72B-Instruct") # huggingface model id or local path
     elif os.path.exists(model_name): # your custom local model path
         return Qwen3(model_path=model_name)
     else:
-        raise ValueError(f"Unknown model: {model_name}")
+        # raise ValueError(f"Unknown model: {model_name}")
+        print("Undefined model, using OpenAI API.")
+        return GPT_4o(model_name, api_key=args.api_key, base_url=args.base_url, mode="text-only")
 
 
 def inference(args, datasets):

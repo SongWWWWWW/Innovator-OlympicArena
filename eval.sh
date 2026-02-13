@@ -19,7 +19,9 @@ export TRANSFORMERS_OFFLINE=1
 export HF_ALLOW_CODE_EVAL="1"
 
 export OPENAI_API_KEY="sk-123456"
-export OPENAI_BASE_URL="http://0.0.0.0:23333/v1"
+# export OPENAI_BASE_URL="http://0.0.0.0:23333/v1"
+export OPENAI_BASE_URL="http://if-dciifplywrj4ybct-service:80/v1"
+export MODEL_NAME="Kimi-K2.5"
 
 MODEL_OUTPUT_DIR="/mnt/innovator/data/wangcong/data/eval/olympic"
 rm -rf $MODEL_OUTPUT_DIR/*
@@ -31,10 +33,10 @@ rm -rf $MODEL_OUTPUT_DIR/*
 
 python ./inference.py \
     --model_output_dir $MODEL_OUTPUT_DIR \
-    --batch 2560 \
+    --batch 256 \
     --api_key $OPENAI_API_KEY \
     --base_url $OPENAI_BASE_URL \
-    --model gpt-4o-text-only \
+    --model $MODEL_NAME \
     --split test \
     --save_error
 

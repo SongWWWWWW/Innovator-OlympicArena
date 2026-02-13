@@ -4,8 +4,9 @@ import json
 from openai import OpenAI
 
 # ================= 配置区 =================
-BASE_URL = "http://127.0.0.1:23333/v1"
-MODEL_NAME = "gpt-4o-text-only"  # 你之前 curl 查到的模型 ID
+# BASE_URL = "http://127.0.0.1:23333/v1"
+BASE_URL = "http://if-dciifplywrj4ybct-service:80/v1"
+MODEL_NAME = "Kimi-K2.5"  # 你之前 curl 查到的模型 ID
 API_KEY = "sk-123456"
 # ==========================================
 
@@ -21,7 +22,7 @@ def test_diagnostics():
         os.environ["http_proxy"] = ""
         os.environ["https_proxy"] = ""
         os.environ["all_proxy"] = ""
-        os.environ["no_proxy"] = "localhost,127.0.0.1,0.0.0.0"
+        os.environ["no_proxy"] = "http://if-dciifplywrj4ybct-service:80"
     else:
         print("   ✅ 未发现系统代理设置。")
 
@@ -49,7 +50,7 @@ def test_diagnostics():
         response = client.chat.completions.create(
             model=MODEL_NAME,
             messages=[{"role": "user", "content": "Say hello!"}],
-            max_tokens=10
+            max_tokens=8192
         )
         content = response.choices[0].message.content
         print(f"   ✅ 调用成功！")
